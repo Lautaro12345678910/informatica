@@ -7,7 +7,7 @@ h2{
 }
 /*Selector de clase*/
 .oscuro{
-    background-color: black;
+    background-color: rgb(32, 176, 219);
     color:white;
 }
 /*Selector ID*/
@@ -15,3 +15,26 @@ h2{
    background-color: chartreuse;
 color:darkmagenta;
 }
+footer {
+    background-color: #8b5e3c;
+    color: #fff8ec;
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  footer a {
+    color: #fff8ec;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    margin: 0 0.5rem; 
+    font-size: 1.8rem; 
+    display: inline-block; 
+  }
+  
+  footer a:hover {
+    color: rgb(255, 0, 170);
+ }
+ header{
+    background-image: url("./images.png");
+ }
