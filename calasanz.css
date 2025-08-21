@@ -37,4 +37,8 @@ footer {
  }
  header{
     background-image: url("./images.png");
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    padding: 3rem 1rem;
  }
