@@ -1,15 +1,25 @@
 <!DOCTYPE html>
-<htms lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Document</title>
+<title>Verificador de Edad</title>
 </head>
 <body>
-   <h1>Ejercicio1:Modificar texto en el DOM</h1>
-   <p id="texto">rkt</p>
-   <button id="boton">Haz clic</button>
-    <script src="./Ejercicio1.js"></script>
+<h1>Verifica tu edad para continuar</h1>
+<button onclick="verificarEdad()">Verificar edad</button>
+<script>
+function verificarEdad() { 
+var edadTexto = prompt("Por favor, ingresa tu edad:");
+var edadNumero = parseInt(edadTexto);
+if (isNaN(edadNumero)) {
+alert("Error. Debes ingresar un número.");
+}
+else if (edadNumero >= 18) {
+alert("¡Acceso permitido! Eres mayor de edad. 👍");
+}
+else {
+alert("Acceso denegado. Eres menor de edad. ⛔");
+}
+}
+</script>
 </body>
 </html>
