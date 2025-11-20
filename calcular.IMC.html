@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC</title>
+</head>
+<body>
+
+<div class="container">
+    <h2>Calculadora de IMC</h2>
+    <form id="imcForm">
+        <label for="peso">Peso (kilogramos):</label>
+        <input type="number" id="peso" step="0.1" placeholder="Ej: 70.5" required>
+
+        <label for="altura">Altura (metros):</label>
+        <input type="number" id="altura" step="0.01" placeholder="Ej: 1.75" required>
+
+        <button type="submit">Calcular IMC</button>
+    </form>
+
+    <div id="resultado">
+        </div>
+</div>
+
+<script>
+    document.getElementById('imcForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Detiene el envío del formulario
+
+        // 1. Obtener los valores y convertirlos a números flotantes
+        const peso = parseFloat(document.getElementById('peso').value);
+        const altura = parseFloat(document.getElementById('altura').value);
+        const resultadoDiv = document.getElementById('resultado');
+
+        // Limpiar el resultado anterior
+        resultadoDiv.className = '';
+        resultadoDiv.innerHTML = '';
+
+        // 2. Validación y cálculo
+        if (isNaN(peso) || isNaN(altura) || peso <= 0 || altura <= 0) {
+            resultadoDiv.innerHTML = "Por favor, ingresa valores válidos y positivos.";
+            resultadoDiv.classList.add('obesidad'); // Usamos esta clase para mensajes de error
+            return;
+        }
+
+        // FÓRMULA: IMC = peso / altura^2
+        const imc = peso / (altura * altura);
+
+        // Redondear el IMC a un decimal
+        const imcRedondeado = imc.toFixed(1);
+
+        // 3. Determinar la interpretación
+        let interpretacion = "";
+        let claseEstilo = "";
+
+        if (imc < 18.5) {
+            interpretacion = "Bajo peso";
+            claseEstilo = "bajo";
+        } else if (imc >= 18.5 && imc <= 24.9) {
+            interpretacion = "Peso normal";
+            claseEstilo = "normal";
+        } else if (imc >= 25 && imc <= 29.9) {
+            interpretacion = "Sobrepeso";
+            claseEstilo = "sobrepeso";
+        } else { // 30 o más
+            interpretacion = "Obesidad";
+            claseEstilo = "obesidad";
+        }
+
+        // 4. Mostrar el resultado
+        resultadoDiv.classList.add(claseEstilo);
+        resultadoDiv.innerHTML = `
+            <p>TuIMC es: ${imcRedondeado}</p>
+            <p>Clasificación: ${interpretacion}</p>
+        `;
+    });
+</script>
+
+</body>
+</html>

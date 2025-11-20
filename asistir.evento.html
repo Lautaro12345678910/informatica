@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Eventos</title>
+    </head>
+<body>
+
+<div class="container">
+    <h2> Contador de Eventos</h2>
+
+    <label for="nombreEvento">Nombre del Evento:</label>
+    <input type="text" id="nombreEvento" placeholder="Ej: Cumpleaños, Examen, Viaje" required>
+
+    <label for="fechaEvento">Fecha del Evento:</label>
+    <input type="date" id="fechaEvento" required>
+
+    <button onclick="calcularDias()">Calcular</button>
+
+    <div id="resultado">
+        </div>
+</div>
+
+<script>
+    function calcularDias() {
+        // 1. Obtener valores de entrada y elemento de resultado
+        const nombreEvento = document.getElementById('nombreEvento').value.trim();
+        const fechaEventoStr = document.getElementById('fechaEvento').value;
+        const resultadoDiv = document.getElementById('resultado');
+       
+        // Limpiar estilos anteriores
+        resultadoDiv.className = '';
+
+        // 2. Validación básica
+        if (!nombreEvento || !fechaEventoStr) {
+            resultadoDiv.innerHTML = "Por favor, ingresa el nombre y la fecha del evento.";
+            resultadoDiv.classList.add('paso');
+            return;
+        }
+
+        // 3. Convertir las fechas a objetos Date
+        const fechaHoy = new Date();
+        // Ajustamos la hora de "hoy" a medianoche para que el cálculo sea preciso en días completos
+        fechaHoy.setHours(0, 0, 0, 0);
+       
+        // Creamos la fecha del evento
+        const fechaEvento = new Date(fechaEventoStr);
+        // Ajustamos la fecha del evento a medianoche del día, ya que el input[type="date"] lo devuelve como UTC,
+        // esto evita errores de zona horaria que pueden cambiar el día.
+        fechaEvento.setMinutes(fechaEvento.getMinutes() + fechaEvento.getTimezoneOffset());
+
+
+        // 4. Calcular la diferencia en milisegundos
+        // Usamos la fecha del evento ajustada para la comparación
+        const diferenciaMilisegundos = fechaEvento.getTime() - fechaHoy.getTime();
+
+        // 5. Convertir milisegundos a días
+        // 1 día = 24 horas * 60 minutos * 60 segundos * 1000 milisegundos
+        const unDiaMilisegundos = 1000 * 60 * 60 * 24;
+       
+        // Usamos Math.round() para obtener el número de días completos
+        const diasFaltantes = Math.round(diferenciaMilisegundos / unDiaMilisegundos);
+
+        // 6. Mostrar el resultado
+        let mensaje = '';
+
+        if (diasFaltantes > 0) {
+            // Faltan días
+            mensaje = `Faltan ${diasFaltantes} días para ${nombreEvento}.`;
+            resultadoDiv.classList.add('faltan');
+        } else if (diasFaltantes === 0) {
+            // Es hoy
+            mensaje = `¡El evento ${nombreEvento} es HOY!`;
+            resultadoDiv.classList.add('faltan');
+        } else {
+            // Ya pasó
+            // Math.abs() se usa para mostrar el número de días que pasaron sin el signo negativo.
+            const diasPasados = Math.abs(diasFaltantes);
+            mensaje = `El evento ${nombreEvento}ya ocurrió. (Pasaron ${diasPasados} días)`;
+            resultadoDiv.classList.add('paso');
+        }
+       
+        // Mostrar el mensaje final
+        resultadoDiv.innerHTML = mensaje;
+    }
+</script>
+
+</body>
+</html>

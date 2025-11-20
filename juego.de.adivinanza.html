@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Adivinanza</title>
+</head>
+<body>
+
+    <h1>Adivina el Número Secreto</h1>
+   
+    <button onclick="iniciarJuego()">Jugar</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        
+        const NUMERO_SECRETO = 7;
+       
+        
+        const resultadoElemento = document.getElementById('resultado');
+
+    
+        function iniciarJuego() {
+            
+            resultadoElemento.textContent = "";
+
+
+            const respuestaUsuario = prompt("¡Adivina el número! Introduce un número entero (del 1 al 10, por ejemplo):");
+
+         
+            if (respuestaUsuario === null || respuestaUsuario.trim() === "") {
+                resultadoElemento.textContent = "Juego cancelado. ¡Vuelve a intentarlo!";
+                return; 
+            }
+
+            const numeroAdivinado = parseInt(respuestaUsuario);
+
+            if (isNaN(numeroAdivinado)) {
+                resultadoElemento.textContent = "Error: Por favor, introduce un número válido.";
+                return;
+            }
+
+           
+            let mensaje;
+            if (numeroAdivinado === NUMERO_SECRETO) {
+                mensaje = `¡Felicidades! Acertaste. El número secreto era ${NUMERO_SECRETO}.`;
+                resultadoElemento.style.color = "green";
+            } else {
+                mensaje = `Fallaste. Intentaste con ${numeroAdivinado}. El número secreto era ${NUMERO_SECRETO}.`;
+                resultadoElemento.style.color = "red";
+            }
+
+        
+            resultadoElemento.textContent = mensaje;
+        }
+    </script>
+</body>
+</html>
+
+
+

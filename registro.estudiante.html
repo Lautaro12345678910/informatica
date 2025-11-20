@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro y Bienvenida de Estudiante</title>
+    </head>
+<body>
+
+<div class="container">
+    <h2> Registro de Estudiante</h2>
+    <form id="registroForm">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" required>
+
+        <label for="curso">Curso:</label>
+        <input type="text" id="curso" name="curso" required>
+
+        <button type="submit">Mostrar Bienvenida</button>
+    </form>
+</div>
+
+<div id="resultado">
+    </div>
+
+<script>
+    document.getElementById('registroForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evita el envío tradicional del formulario
+
+        // 1. Obtener los valores del formulario
+        const nombre = document.getElementById('nombre').value.trim();
+        const apellido = document.getElementById('apellido').value.trim();
+        const curso = document.getElementById('curso').value.trim();
+        const resultadoDiv = document.getElementById('resultado');
+
+        // 2. Validar que todos los campos estén llenos
+        if (!nombre || !apellido || !curso) {
+            resultadoDiv.style.display = 'block';
+            resultadoDiv.innerHTML = '<h3> Error de Registro</h3><p>Por favor, completa **todos** los campos.</p>';
+            return;
+        }
+
+        // 3. Crear el mensaje de bienvenida
+        const mensajeHTML = `
+            <h3>¡Bienvenido/a al Sistema! </h3>
+            <p>
+                Hola, <span class="data-highlight">${nombre} ${apellido}</span>.
+                <br>
+                Hemos registrado tu inscripción en el curso de <span class="data-highlight">${curso}</span>.
+                <br>
+                ¡Te deseamos mucho éxito!
+            </p>
+        `;
+
+        // 4. Mostrar el mensaje en el área de resultado y hacerlo visible
+        resultadoDiv.innerHTML = mensajeHTML;
+        resultadoDiv.style.display = 'block';
+
+        // Opcional: Limpiar el formulario después de mostrar el resultado
+        // document.getElementById('registroForm').reset();
+    });
+</script>
+
+</body>
+</html>
+
+

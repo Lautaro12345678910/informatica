@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador Decremental</title>
+</head>
+<body>
+
+    <h1>Contador Decremental</h1>
+   
+    <div id="contador">10</div>
+
+    <button onclick="decrementarContador()">
+        Disminuir en 1
+    </button>
+
+    <script>
+        // a. Variable global que mantiene el estado del contador.
+        let contador = 10;
+       
+        // b. Referencia al elemento HTML donde se muestra el número.
+        const elementoContador = document.getElementById('contador');
+
+        // c. Función que se ejecuta al hacer clic en el botón.
+        function decrementarContador() {
+           
+            // Si el contador es mayor que 0, se ejecuta la disminución.
+            if (contador > 0) {
+                // 1. Disminuir el valor de la variable
+                contador--;
+               
+                // 2. Actualizar el contenido del elemento HTML
+                elementoContador.textContent = contador;
+            } else {
+                // Mensaje opcional cuando el contador llega a cero
+                elementoContador.textContent = '0 - ¡Finalizado!';
+            }
+        }
+    </script>
+</body>
+</html>
